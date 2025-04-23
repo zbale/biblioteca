@@ -95,7 +95,6 @@ def superadmin_dashboard():
     return render_template('superadmin/dashboard_superadmin.html', superadmin=superadmin)
 
 
-# ========================= GESTIÓN DE USUARIOS =========================
 @superadmin_rutas_bp.route('/usuarios', methods=['GET', 'POST'])
 def gestion_usuarios():
     usuarios = []
@@ -148,8 +147,6 @@ def gestion_usuarios():
 
     return render_template('superadmin/gestion_usuarios.html', usuarios=usuarios)
 
-
-# ========================= ELIMINAR USUARIO =========================
 @superadmin_rutas_bp.route('/usuarios/eliminar/<int:id_usuario>', methods=['POST'])
 def eliminar_usuario(id_usuario):
     conn = mysql.connector.connect(
