@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Los Recuerdos De Ella</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral" aria-controls="menuLateral">
+                <i class="fas fa-bars"></i> Menú
+            </button>
+            <a class="navbar-brand ms-3" href="/">Los Recuerdos De Ella</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon text-white"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">
+                            <i class="fas fa-sign-in-alt"></i> Iniciar sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Offcanvas Menu -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="menuLateral" aria-labelledby="menuLateralLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="menuLateralLabel">Menú</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="/libros"><i class="fas fa-book"></i> Libros</a></li>
+                <li class="nav-item"><a class="nav-link" href="/prestamos"><i class="fas fa-user"></i> Préstamos</a></li>
+                <li class="nav-item"><a class="nav-link" href="/reservas"><i class="fas fa-home"></i> Reservas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/reportes"><i class="fas fa-chart-bar"></i> Reportes</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <section>
+            <h2 class="mb-4">Bienvenido a la Biblioteca Universitaria</h2>
+            <p>En "Los Recuerdos De Ella" contamos con una vasta colección de más de 50,000 volúmenes, tanto en formato físico como digital, para que nuestros estudiantes, docentes y personal administrativo puedan acceder al conocimiento más relevante de diversas disciplinas. Nuestro objetivo es proporcionar un entorno de aprendizaje enriquecido a través del acceso a libros, materiales y recursos educativos.</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti voluptatibus sit libero quod quam est voluptatum modi, molestias numquam. Ex aut, corrupti eum officiis impedit laborum culpa autem laboriosam aliquam.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus. Quisquam, voluptatibus. Quisquam, voluptatibus. Quisquam, voluptatibus Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatibus. Quisquam, voluptatibus. Quisquam, voluptatibus. Quisquam, voluptatibus
+        </section>
+    
+        <section class="mt-5 text-center">
+            <h2 class="mb-4">Nuestros servicios</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                <div class="col">
+                    <div class="card h-100 text-white bg-dark border-0 custom-card">
+                        <img src="{{ url_for('static', filename='img/imagen1.jpg') }}" class="card-img-top" alt="Servicio 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Prestamos Basicos</h5>
+                            <p class="card-text">Accede fácilmente a libros físicos con un préstamo de 15 días. Ideal para estudiantes que requieren material rápidamente.</p>
+                            <p class="fw-bold">Gratis</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col">
+                    <div class="card h-100 text-white bg-dark border-0 custom-card">
+                        <img src="{{ url_for('static', filename='img/imagen2.jpg') }}" class="card-img-top" alt="Servicio 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Acceso Digital</h5>
+                            <p class="card-text">Consulta nuestra biblioteca digital con más de 20,000 títulos disponibles en línea desde cualquier lugar.</p>
+                            <p class="fw-bold">Incluido con registro</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col">
+                    <div class="card h-100 text-white bg-dark border-0 custom-card">
+                        <img src="{{ url_for('static', filename='img/imagen3.jpg') }}" class="card-img-top" alt="Servicio 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Reserva Anticipada</h5>
+                            <p class="card-text">Reserva tus libros preferidos antes de que estén disponibles. Ideal para obras muy solicitadas.</p>
+                            <p class="fw-bold">Funcionalidad premium</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+
+    <footer class="mt-5">
+        <hr>
+        <p>© 2025 Biblioteca Universitaria | Desarrollado por José Zabaleta</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</body>
+</html>

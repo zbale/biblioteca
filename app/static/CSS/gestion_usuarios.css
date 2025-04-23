@@ -1,0 +1,112 @@
+/* Estilo para el fondo del body */
+body {
+    background-color: #121212; /* Fondo oscuro */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Estilos para la tabla */
+table {
+    background-color: #2b2b2b; /* Fondo oscuro para la tabla */
+    color: #f8f9fa; /* Color de texto claro */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Sombras para mejor contraste */
+    width: 100%;
+    border-spacing: 3px; /* Espaciado entre las celdas */
+    border-collapse: separate;
+}
+
+/* Estilos de las cabeceras y celdas */
+th, td {
+    padding: 15px 20px; /* Aumenta el espaciado dentro de cada celda */
+    text-align: center;
+}
+
+th {
+    background-color: #007bff; /* Azul para las cabeceras */
+}
+
+td {
+    background-color: #333333; /* Fondo más oscuro para las celdas */
+}
+
+/* Estilo para las filas */
+tr:nth-child(even) {
+    background-color: #444444; /* Fondo gris claro para filas pares */
+}
+
+tr:nth-child(odd) {
+    background-color: #333333; /* Fondo más oscuro para filas impares */
+}
+
+
+/* Personaliza el botón de añadir usuario */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Estilos del modal */
+.modal-content {
+    border-radius: 15px;
+    background-color: #333333;
+    color: white;
+}
+
+.modal-header {
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-body {
+    background-color: #444444;
+}
+
+/* Estilos para el formulario dentro del modal */
+.form-label {
+    color: #f8f9fa;
+}
+
+.form-control {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilos adicionales */
+h3 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.alert {
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.alert-info {
+    background-color: #5bc0de;
+}
+
+.alert-warning {
+    background-color: #f0ad4e;
+}
+
+.alert-danger {
+    background-color: #d9534f;
+}

@@ -1,0 +1,61 @@
+body {
+    background-color: #121212;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .card {
+    background-color: #1e1e1e;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.3);
+  }
+
+  .btn-primary {
+    background-color: #00bcd4;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #0097a7;
+  }
+
+  a {
+    color: #00bcd4;
+  }
+
+  a:hover {
+    color: #0097a7;
+    text-decoration: none;
+  }
+
+  /* Estilos para el modal */
+  .modal-content {
+    border-radius: 10px; 
+  }
+
+  .modal-header {
+    border-bottom: none; 
+  }
+
+  .modal-footer {
+    border-top: none; 
+  }
+
+  .modal-body i {
+    animation: bounce 1s infinite; 
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }

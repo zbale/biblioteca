@@ -1,0 +1,36 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+{% block title %}Reservas{% endblock %}
+{% block content %}
+  <h2>Reservas</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Libro</th>
+        <th>Usuario</th>
+        <th>Fecha de Reserva</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for reserva in reservas %}
+        <tr>
+          <td>{{ reserva.libro.titulo }}</td>
+          <td>{{ reserva.usuario.nombre }}</td>
+          <td>{{ reserva.fecha_reserva }}</td>
+          <td>{{ reserva.estado }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+</body>
+</html> -->

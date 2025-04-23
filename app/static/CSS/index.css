@@ -1,0 +1,144 @@
+:root {
+    --bg-dark: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #ffffff;
+    --accent: #00bcd4;
+    --accent-hover: #0097a7;
+}
+
+body {
+    background-color: #121212; /* Fondo oscuro */
+    color: #e0e0e0; /* Texto gris claro */
+}
+
+.navbar {
+    background-color: #1e1e1e; /* Fondo oscuro para la barra de navegación */
+    border-bottom: 1px solid #444; /* Línea separadora */
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+    color: #e0e0e0 !important; /* Texto gris claro */
+}
+
+.navbar .nav-link:hover {
+    color: #00bcd4 !important; /* Color de acento */
+}
+
+.card, .table, .form-control, .btn {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: none;
+}
+
+.card {
+    background-color: #1e1e1e; /* Fondo oscuro para las tarjetas */
+    color: #e0e0e0; /* Texto gris claro */
+    border: 1px solid #444; /* Borde gris oscuro */
+}
+
+.card .card-title {
+    color: #ffffff; /* Títulos blancos */
+}
+
+.card .card-text {
+    color: #b0b0b0; /* Texto gris */
+}
+
+.btn-primary {
+    background-color: #00bcd4;
+    border-color: #00bcd4;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #0097a7;
+    border-color: #0097a7;
+}
+
+footer {
+    background-color: #1e1e1e; /* Fondo oscuro */
+    color: #888; /* Texto gris claro */
+    padding: 20px 0;
+    border-top: 1px solid #444; /* Línea separadora */
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.navbar-brand img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.footer-img {
+    height: 40px;
+    margin-top: 10px;
+    filter: invert(1); /* Hace visible el logo en fondos oscuros */
+}
+
+/* Sidebar (Offcanvas) */
+.offcanvas {
+    background-color: #2c2c2c; /* Gris oscuro */
+    color: #ffffff; /* Texto blanco */
+}
+
+.offcanvas .offcanvas-header {
+    border-bottom: 1px solid #444; /* Línea separadora */
+}
+
+.offcanvas .offcanvas-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.offcanvas .btn-close {
+    filter: invert(1); /* Hace el botón de cerrar visible en fondos oscuros */
+}
+
+.offcanvas .nav-link {
+    color: #ffffff; /* Texto blanco */
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.offcanvas .nav-link:hover {
+    background-color: #444; /* Fondo más oscuro al pasar el mouse */
+    color: #00bcd4; /* Color de acento */
+}
+
+/* Estilo para las tarjetas */
+.custom-card {
+    border: 1px solid #444; /* Borde gris oscuro */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación */
+}
+
+.custom-card:hover {
+    transform: scale(1.05); /* Efecto de zoom */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra al pasar el mouse */
+}
+
+.custom-card img {
+    height: 200px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Ajusta la imagen sin deformarla */
+    border-bottom: 1px solid #444; /* Línea separadora debajo de la imagen */
+}
+
+.custom-card .card-title {
+    font-size: 1.25rem; /* Tamaño del título */
+    font-weight: bold;
+    color: #00bcd4; /* Color de acento */
+}
+
+.custom-card .card-text {
+    font-size: 0.95rem; /* Tamaño del texto */
+    color: #b0b0b0; /* Texto gris claro */
+}
+
+.custom-card .fw-bold {
+    color: #ffffff; /* Texto blanco */
+    font-size: 1rem; /* Tamaño del texto */
+    margin-top: 10px;
+}
