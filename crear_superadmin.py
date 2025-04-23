@@ -33,9 +33,9 @@ if resultado:
     """, (nombre, email, contraseña_encriptada, id_rol))
 
     conn.commit()
-    print("✅ Superadministrador creado exitosamente.")
+    print("Superadministrador creado exitosamente.")
 else:
-    print("❌ El rol 'Superadmin' no existe. Asegúrate de haberlo insertado en la tabla roles.")
+    print("El rol 'Superadmin' no existe. Asegúrate de haberlo insertado en la tabla roles.")
 
 cursor.close()
 conn.close()
