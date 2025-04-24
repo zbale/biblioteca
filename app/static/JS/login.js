@@ -34,6 +34,16 @@ form.addEventListener('submit', async (e) => {
           window.location.href = "/superadmin/dashboard";
         };
       } else if (resultado.usuario.rol === 2) {
+        mensajeBienvenida.textContent = `Bienvenido, Administrador ${resultado.usuario.nombre}`;
+        btnIngresar.onclick = () => {
+          window.location.href = "/administrador/dashboard";
+        };
+      } else if (resultado.usuario.rol === 3) {
+        mensajeBienvenida.textContent = `Bienvenido, Bibliotecario ${resultado.usuario.nombre}`;
+        btnIngresar.onclick = () => {
+          window.location.href = "/bibliotecario/dashboard";
+        };
+      } else if (resultado.usuario.rol === 4) {
         mensajeBienvenida.textContent = `Bienvenido, Estudiante ${resultado.usuario.nombre}`;
         btnIngresar.onclick = () => {
           window.location.href = "/estudiante/dashboard";
