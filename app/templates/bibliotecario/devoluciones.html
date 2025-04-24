@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Devoluciones - Bibliotecario</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h3 class="text-center">Devoluciones</h3>
+    <form method="POST">
+      <div class="mb-3">
+        <label for="usuario" class="form-label">Usuario</label>
+        <input type="text" class="form-control" id="usuario" name="usuario" required>
+      </div>
+      <div class="mb-3">
+        <label for="libro" class="form-label">Libro</label>
+        <input type="text" class="form-control" id="libro" name="libro" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Registrar Devolución</button>
+    </form>
+    <h4 class="mt-5">Devoluciones Pendientes</h4>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Usuario</th>
+          <th>Libro</th>
+          <th>Fecha de Préstamo</th>
+          <th>Devuelto</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for devolucion in devoluciones %}
+        <tr>
+          <td>{{ devolucion.id }}</td>
+          <td>{{ devolucion.usuario }}</td>
+          <td>{{ devolucion.libro }}</td>
+          <td>{{ devolucion.fecha_prestamo }}</td>
+          <td>{{ 'Sí' if devolucion.devuelto else 'No' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

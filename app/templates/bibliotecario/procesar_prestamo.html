@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Procesar Préstamo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h3 class="text-center">Procesar Préstamo</h3>
+    <form method="POST">
+      <div class="mb-3">
+        <label for="id_estudiante" class="form-label">ID del Estudiante</label>
+        <input type="text" class="form-control" id="id_estudiante" name="id_estudiante" required>
+      </div>
+      <div class="mb-3">
+        <label for="codigo_libro" class="form-label">Código del Libro</label>
+        <input type="text" class="form-control" id="codigo_libro" name="codigo_libro" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Registrar Préstamo</button>
+    </form>
+  </div>
+</body>
+</html>

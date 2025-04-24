@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Catálogo de Libros - Bibliotecario</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <!-- Menú de navegación -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <!-- Botón para volver -->
+      <a href="{{ url_for('bibliotecario.dashboard') }}" class="btn btn-primary">
+        Ir al Dashboard
+      </a>
+
+      <!-- Título de la página -->
+      <h4 class="text-center flex-grow-1">Catálogo de Libros</h4>
+
+      <!-- Botón para añadir un nuevo libro -->
+      <a href="{{ url_for('bibliotecario.agregar_libro') }}" class="btn btn-primary">
+        <i class="fas fa-plus me-1"></i> Añadir Libro
+      </a>
+    </div>
+
+    <!-- Tabla de libros -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>ISBN</th>
+          <th>Categoría</th>
+          <th>Fecha de Publicación</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in libros %}
+        <tr>
+          <td>{{ item.id_libro }}</td>
+          <td>{{ item.titulo }}</td>
+          <td>{{ item.isbn }}</td>
+          <td>{{ item.categoria or 'Sin categoría' }}</td>
+          <td>{{ item.fecha_publicacion or 'No disponible' }}</td>
+          <td>
+            <a href="#" 
+               class="btn btn-warning btn-sm" 
+               onclick="openEditModal({{ item.id_libro }}, '{{ item.titulo|e }}', '{{ item.isbn|e }}', '{{ item.categoria|e }}', '{{ item.fecha_publicacion|e }}')" 
+               data-bs-toggle="modal" 
+               data-bs-target="#editBookModal">
+               Editar
+            </a>
+            <form action="{{ url_for('bibliotecario.eliminar_libro', id_libro=item.id_libro) }}" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal para editar libro -->
+  <div class="modal fade" id="editBookModal" tabindex="-1" aria-labelledby="editBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editBookModalLabel">Editar Libro</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editBookForm" action="" method="POST">
+          <input type="hidden" id="editBookId" name="id_libro">
+          <div class="mb-3">
+            <label for="editTitulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="editTitulo" name="titulo" required>
+          </div>
+          <div class="mb-3">
+            <label for="editIsbn" class="form-label">ISBN</label>
+            <input type="text" class="form-control" id="editIsbn" name="isbn" required>
+          </div>
+          <div class="mb-3">
+            <label for="editCategoria" class="form-label">Categoría</label>
+            <input type="text" class="form-control" id="editCategoria" name="categoria_id">
+          </div>
+          <div class="mb-3">
+            <label for="editFechaPublicacion" class="form-label">Fecha de Publicación</label>
+            <input type="date" class="form-control" id="editFechaPublicacion" name="fecha_publicacion">
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  function openEditModal(id, titulo, isbn, categoria, fecha_publicacion) {
+    // Rellenar los campos del modal con los datos del libro
+    document.getElementById('editBookId').value = id;
+    document.getElementById('editTitulo').value = titulo;
+    document.getElementById('editIsbn').value = isbn;
+    document.getElementById('editCategoria').value = categoria;
+    document.getElementById('editFechaPublicacion').value = fecha_publicacion;
+
+    // Actualizar la acción del formulario
+    document.getElementById('editBookForm').action = `/bibliotecario/editar_libro/${id}`;
+  }
+  </script>
+</body>
+</html>

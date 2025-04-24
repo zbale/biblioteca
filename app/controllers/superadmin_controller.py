@@ -211,19 +211,18 @@ def gestion_usuarios():
 
 @superadmin_rutas_bp.route('/usuarios/eliminar/<int:id_usuario>', methods=['POST'])
 def eliminar_usuario(id_usuario):
-    conn = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='valecita',
-        database='biblioteca_db'
-    )
-    cursor = conn.cursor()
-
     try:
+        conn = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='valecita',
+            database='biblioteca_db'
+        )
+        cursor = conn.cursor()
         cursor.execute("DELETE FROM usuarios WHERE id_usuario = %s", (id_usuario,))
         conn.commit()
-        flash('Usuario eliminado exitosamente.', 'success')
-    except Exception as e:
+        flash('Usuario eliminado correctamente.', 'success')
+    except mysql.connector.Error as e:
         conn.rollback()
         flash(f'Ocurrió un error al eliminar el usuario: {e}', 'danger')
     finally:
@@ -260,6 +259,37 @@ def editar_usuario():
     except mysql.connector.Error as e:
         conn.rollback()
         flash(f'Ocurrió un error al actualizar el usuario: {e}', 'danger')
+    finally:
+        cursor.close()
+        conn.close()
+
+    return redirect(url_for('superadmin_rutas.gestion_usuarios'))
+
+@superadmin_rutas_bp.route('/usuarios/agregar', methods=['POST'])
+def agregar_usuario():
+    nombre = request.form.get('nombre')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    rol_id = request.form.get('rol_id')
+
+    try:
+        conn = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='valecita',
+            database='biblioteca_db'
+        )
+        cursor = conn.cursor()
+        hashed_password = generate_password_hash(password)
+        cursor.execute("""
+            INSERT INTO usuarios (nombre, email, contraseña, rol_id)
+            VALUES (%s, %s, %s, %s)
+        """, (nombre, email, hashed_password, rol_id))
+        conn.commit()
+        flash('Usuario agregado exitosamente.', 'success')
+    except mysql.connector.Error as e:
+        conn.rollback()
+        flash(f'Ocurrió un error al agregar el usuario: {e}', 'danger')
     finally:
         cursor.close()
         conn.close()
