@@ -1,0 +1,59 @@
+/* Fondo general */
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: Arial, sans-serif;
+}
+
+/* Tarjeta del formulario */
+.card {
+  border-radius: 10px;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #444;
+}
+
+.card-title {
+  color: #00bcd4;
+  font-weight: bold;
+}
+
+/* Botones */
+.btn-primary {
+  background-color: #00bcd4;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0097a7;
+}
+
+.btn-secondary {
+  background-color: #444;
+  border: none;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background-color: #666;
+}
+
+/* Modal */
+.modal-content {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #444;
+}
+
+.modal-header {
+  border-bottom: 1px solid #444;
+}
+
+.modal-footer {
+  border-top: 1px solid #444;
+}
+
+.modal-title {
+  color: #00bcd4;
+}
+

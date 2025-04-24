@@ -3,33 +3,34 @@ from werkzeug.security import generate_password_hash
 import mysql.connector
 
 # Blueprints
-superadmin_bp = Blueprint('superadmin', __name__, url_prefix='/superadmin')
 superadmin_rutas_bp = Blueprint('superadmin_rutas', __name__)
 
 
-@superadmin_bp.route('/perfil', methods=['GET', 'POST'])
+@superadmin_rutas_bp.route('/perfil', methods=['GET', 'POST'])
 def perfil():
     if request.method == 'POST':
+        # Obtener los datos del formulario
         nombre = request.form.get('nombre')
         email = request.form.get('email')
-        nueva_contraseña = request.form.get('password')
-
-        conn = mysql.connector.connect(
-            host='localhost',
-            user='root',
-            password='valecita',
-            database='biblioteca_db'
-        )
-        cursor = conn.cursor()
+        password = request.form.get('password')
 
         try:
-            if nueva_contraseña:
-                contraseña_encriptada = generate_password_hash(nueva_contraseña)
+            conn = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='valecita',
+                database='biblioteca_db'
+            )
+            cursor = conn.cursor()
+
+            # Actualizar los datos del perfil
+            if password:
+                hashed_password = generate_password_hash(password)
                 cursor.execute("""
                     UPDATE usuarios
                     SET nombre = %s, email = %s, contraseña = %s
                     WHERE rol_id = 1
-                """, (nombre, email, contraseña_encriptada))
+                """, (nombre, email, hashed_password))
             else:
                 cursor.execute("""
                     UPDATE usuarios
@@ -38,37 +39,98 @@ def perfil():
                 """, (nombre, email))
 
             conn.commit()
-            flash('Perfil actualizado exitosamente.' if cursor.rowcount > 0 else 'No se encontraron cambios.', 'success' if cursor.rowcount > 0 else 'warning')
+            return redirect(url_for('superadmin_rutas.perfil'))
+        except mysql.connector.Error as e:
+            conn.rollback()
+        finally:
+            cursor.close()
+            conn.close()
 
-        except Exception as e:
+        return redirect(url_for('superadmin_rutas.perfil'))
+
+    # Obtener los datos actuales del perfil
+    superadmin = {}
+    try:
+        conn = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='valecita',
+            database='biblioteca_db'
+        )
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM usuarios WHERE rol_id = 1")
+        superadmin = cursor.fetchone()
+    except mysql.connector.Error as e:
+        flash(f'Ocurrió un error al cargar los datos del perfil: {e}', 'danger')
+    finally:
+        cursor.close()
+        conn.close()
+
+    return render_template('superadmin/perfil_super_administrador.html', superadmin=superadmin)
+
+@superadmin_rutas_bp.route('/perfil/editar', methods=['GET', 'POST'])
+def editar_perfil():
+    if request.method == 'POST':
+        # Obtener los datos del formulario
+        nombre = request.form.get('nombre')
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        try:
+            conn = mysql.connector.connect(
+                host='localhost',
+                user='root',
+                password='valecita',
+                database='biblioteca_db'
+            )
+            cursor = conn.cursor()
+
+            # Actualizar los datos del perfil
+            if password:
+                hashed_password = generate_password_hash(password)
+                cursor.execute("""
+                    UPDATE usuarios
+                    SET nombre = %s, email = %s, contraseña = %s
+                    WHERE rol_id = 1
+                """, (nombre, email, hashed_password))
+            else:
+                cursor.execute("""
+                    UPDATE usuarios
+                    SET nombre = %s, email = %s
+                    WHERE rol_id = 1
+                """, (nombre, email))
+
+            conn.commit()
+            flash('Perfil actualizado exitosamente.', 'success')
+            return redirect(url_for('superadmin_rutas.perfil'))
+        except mysql.connector.Error as e:
             conn.rollback()
             flash(f'Ocurrió un error al actualizar el perfil: {e}', 'danger')
         finally:
             cursor.close()
             conn.close()
 
-        return redirect(url_for('superadmin_rutas.superadmin_dashboard'))
+        return redirect(url_for('superadmin_rutas.perfil'))
 
-    # Cargar datos actuales
-    conn = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='valecita',
-        database='biblioteca_db'
-    )
-    cursor = conn.cursor(dictionary=True)
-
+    # Obtener los datos actuales del perfil
+    superadmin = {}
     try:
-        cursor.execute("SELECT nombre, email FROM usuarios WHERE rol_id = 1")
+        conn = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='valecita',
+            database='biblioteca_db'
+        )
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM usuarios WHERE rol_id = 1")
         superadmin = cursor.fetchone()
-    except Exception as e:
-        flash(f'Ocurrió un error al cargar los datos: {e}', 'danger')
-        superadmin = {}
+    except mysql.connector.Error as e:
+        flash(f'Ocurrió un error al cargar los datos del perfil: {e}', 'danger')
     finally:
         cursor.close()
         conn.close()
 
-    return render_template('superadmin/perfil_superadmin.html', superadmin=superadmin)
+    return render_template('superadmin/editar_perfil.html', superadmin=superadmin)
 
 @superadmin_rutas_bp.route('/dashboard')
 def superadmin_dashboard():
@@ -164,6 +226,40 @@ def eliminar_usuario(id_usuario):
     except Exception as e:
         conn.rollback()
         flash(f'Ocurrió un error al eliminar el usuario: {e}', 'danger')
+    finally:
+        cursor.close()
+        conn.close()
+
+    return redirect(url_for('superadmin_rutas.gestion_usuarios'))
+
+@superadmin_rutas_bp.route('/usuarios/editar', methods=['POST'])
+def editar_usuario():
+    id_usuario = request.form.get('id_usuario')
+    nombre = request.form.get('nombre')
+    email = request.form.get('email')
+    rol_id = request.form.get('rol_id')
+
+    try:
+        conn = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='valecita',
+            database='biblioteca_db'
+        )
+        cursor = conn.cursor()
+
+        # Actualizar los datos del usuario en la base de datos
+        cursor.execute("""
+            UPDATE usuarios
+            SET nombre = %s, email = %s, rol_id = %s
+            WHERE id_usuario = %s
+        """, (nombre, email, rol_id, id_usuario))
+        conn.commit()
+
+        flash('Usuario actualizado exitosamente.', 'success')
+    except mysql.connector.Error as e:
+        conn.rollback()
+        flash(f'Ocurrió un error al actualizar el usuario: {e}', 'danger')
     finally:
         cursor.close()
         conn.close()
